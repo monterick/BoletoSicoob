@@ -2,7 +2,7 @@
 
 namespace Bancos\Sicoob\Remessa\CNAB240;
 
-class Remessa
+class Arquivo
 {
 
     /**
