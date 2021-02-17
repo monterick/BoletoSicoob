@@ -5,7 +5,6 @@ namespace Bancos\Sicoob\Remessa\CNAB240;
 class HeaderArquivo
 {
 
-
     /**
      * Gera Header Arquivo
      *
@@ -38,9 +37,7 @@ class HeaderArquivo
         $banco = 756;
         $lote = 0000;
         $tipo_registro = 0;
-
         $cnab_1 = " ";
-
         //$tipo_inscricao
         //$numero_inscricao
         //$codigo_convenio
@@ -50,18 +47,14 @@ class HeaderArquivo
         //$dv_conta_corrente
         $dv_ag_conta_corrente = "0";
         //$nome_empresa
-
         $nome_banco = "SICOOB";
-
         $cnab_2 = " ";
-
         $arquivo_codigo = 1;
         //$data_geracao
         //$hora_geracao
         $sequencial = 1;
         $layout_arquivo = 81;
         $densidade = 00000;
-
         $reservado_banco = " ";
         $reservado_empresa = " ";
         $cnab_3 = " ";

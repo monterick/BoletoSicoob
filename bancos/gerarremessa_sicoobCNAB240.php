@@ -8,8 +8,6 @@ require FILE_BASE_API . '/autoload/autoload.inc.php';
     $parametros = array();
     $pdo = Database\MySQL::creditall();
 
-
-
     ############################ Header ############################
     $stm = $pdo->prepare(
         "SELECT	
@@ -108,7 +106,7 @@ require FILE_BASE_API . '/autoload/autoload.inc.php';
             
         ORDER BY
             cp.CartaoPar_consulta,
-            cp.CartaoPar_parcela LIMIT 1"
+            cp.CartaoPar_parcela LIMIT 2"
     );
     $stm->bindParam(1, $login, PDO::PARAM_INT);
     $stm->execute();
@@ -137,7 +135,6 @@ require FILE_BASE_API . '/autoload/autoload.inc.php';
     $stm->bindParam(1, $login, PDO::PARAM_INT);
     $stm->execute();
     $parametros['trailler'] = $stm->fetchAll(PDO::FETCH_ASSOC);
-
 
     $_arquivo_remessa = \Bancos\Sicoob\Remessa\CNAB240\Arquivo::gerarRemessa($parametros);
     var_dump($_arquivo_remessa);
