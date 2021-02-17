@@ -11,14 +11,14 @@ SELECT
    
 	--	cobrança
    CONCAT(cp.CartaoPar_consulta, cp.CartaoPar_parcela) AS numero_documento,
-   DATE_FORMAT(cp.CartaoPar_datavencimento,'%d%m%Y') AS data_vencimento,
+   CAST(DATE_FORMAT(cp.CartaoPar_datavencimento,'%d%m%Y') AS CHAR) AS data_vencimento,
    REPLACE(REPLACE(ROUND(cp.CartaoPar_valorparcela, 2), '.',''), ',','') AS valor_nominal,
-   DATE_FORMAT(cp.CartaoPar_datacadastro,'%d%m%Y') AS data_emissao,
+   CAST(DATE_FORMAT(cp.CartaoPar_datacadastro,'%d%m%Y') AS CHAR) AS data_emissao,
    
 	--	juros
    CASE WHEN c.contratante_juroboleto > 0 THEN '1' ELSE '0' END AS cod_juros_mora,
-   DATE_FORMAT(cp.CartaoPar_datavencimento,'%d%m%Y') AS data_juros_mora,
-   ROUND(cp.CartaoPar_valorparcela * (c.contratante_juroboleto/30), 2) AS valor_juros_mora,
+   CAST(DATE_FORMAT(cp.CartaoPar_datavencimento,'%d%m%Y') AS CHAR) AS data_juros_mora,
+   REPLACE(REPLACE(ROUND(cp.CartaoPar_valorparcela * (c.contratante_juroboleto/30), 2), '.', ''), ',', '') AS valor_juros_mora,
    
 	-- cliente / pagador
    CASE WHEN CHAR_LENGTH(cp.CartaoPar_cpf) > 14 THEN '2' ELSE '1' END AS tipo_inscricao_pagador,
@@ -33,8 +33,8 @@ SELECT
    
 	-- multa
    CASE WHEN c.contratante_txboleto > 0 THEN '1' ELSE '0' END AS codigo_multa,
-   DATE_FORMAT(cp.CartaoPar_datavencimento,'%d%m%Y') AS data_multa,
-   ROUND(cp.CartaoPar_valorparcela * c.contratante_txboleto / 100, 2) AS valor_multa,
+   CAST(DATE_FORMAT(cp.CartaoPar_datavencimento,'%d%m%Y') AS CHAR) AS data_multa,
+   REPLACE(REPLACE(ROUND(cp.CartaoPar_valorparcela * c.contratante_txboleto / 100, 2), '.', ''), ',', '') AS valor_multa,
    
 	-- nosso numero
    (SELECT '')	AS nosso_numero,

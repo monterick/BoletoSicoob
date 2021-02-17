@@ -2,14 +2,9 @@
 
 namespace Bancos\Sicoob\Remessa\CNAB240;
 
-abstract class Banco 
+class Banco
 {
-    protected $banco;
-    protected $lote;
-    protected $registo;
-    
-    
-
-    
-
+    public $banco;
+    public $lote;
+    public $registro;
 }

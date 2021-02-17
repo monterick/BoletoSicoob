@@ -61,15 +61,15 @@ class SeguimentoR
 
         $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($codigo_desconto_2, 1, 'Numerico'); #SEQ 08.3R
         $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($data_desconto_2, 8, 'Numerico'); #SEQ 09.3R
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($valor_desconto_2, 13, 'Numerico'); #SEQ 10.3R
+        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($valor_desconto_2, 15, 'Numerico'); #SEQ 10.3R
 
         $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($codigo_desconto_3, 1, 'Numerico'); #SEQ 11.3R
         $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($data_desconto_3, 8, 'Numerico'); #SEQ 12.3R
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($valor_desconto_3, 13, 'Numerico'); #SEQ 13.3R
+        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($valor_desconto_3, 15, 'Numerico'); #SEQ 13.3R
 
         $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($codigo_multa, 1, 'Alfa Numerico'); #SEQ 14.3R
         $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($data_multa, 8, 'Numerico'); #SEQ 15.3R
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($valor_multa, 13, 'Numerico'); #SEQ 16.3R
+        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($valor_multa, 15, 'Numerico'); #SEQ 16.3R
 
         $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($informacao_pagador, 10, 'Alfa Numerico'); #SEQ 17.3R
 
@@ -89,12 +89,7 @@ class SeguimentoR
 
         $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($emissao_aviso_debito, 1, 'Numerico'); #SEQ 28.3R
         $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($cnab_3, 9, 'Alfa Numerico'); #SEQ 29.3R
-        # preenchimento de espaçõs faltantes
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher(
-            " ",
-            6,
-            'Alfa Numerico'
-        ); #SEQ 30.3R
+
         return $_linha;
     }
 }

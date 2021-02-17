@@ -38,21 +38,25 @@ require FILE_BASE_API . '/autoload/autoload.inc.php';
         "SELECT
             cp.CartaoPar_id,
             c.usuario_LOGIN AS login,
+            
             --	contratante
             c.contratante_agencia AS agencia_cooperativa,
             c.contratante_agenciaDV AS dv_prefixo,
             c.contratante_conta AS conta_corrente,
             c.contratante_contaDV AS dv_conta_corrente,
             c.contratante_carteira AS carteira,
+            
             --	cobrança
             CONCAT(cp.CartaoPar_consulta, cp.CartaoPar_parcela) AS numero_documento,
-            DATE_FORMAT(cp.CartaoPar_datavencimento,'%d%m%Y') AS data_vencimento,
+            CAST(DATE_FORMAT(cp.CartaoPar_datavencimento,'%d%m%Y') AS CHAR) AS data_vencimento,
             REPLACE(REPLACE(ROUND(cp.CartaoPar_valorparcela, 2), '.',''), ',','') AS valor_nominal,
-            DATE_FORMAT(cp.CartaoPar_datacadastro,'%d%m%Y') AS data_emissao,
+            CAST(DATE_FORMAT(cp.CartaoPar_datacadastro,'%d%m%Y') AS CHAR) AS data_emissao,
+            
             --	juros
             CASE WHEN c.contratante_juroboleto > 0 THEN '1' ELSE '0' END AS cod_juros_mora,
-            DATE_FORMAT(cp.CartaoPar_datavencimento,'%d%m%Y') AS data_juros_mora,
-            ROUND(cp.CartaoPar_valorparcela * (c.contratante_juroboleto/30), 2) AS valor_juros_mora,
+            CAST(DATE_FORMAT(cp.CartaoPar_datavencimento,'%d%m%Y') AS CHAR) AS data_juros_mora,
+            REPLACE(REPLACE(ROUND(cp.CartaoPar_valorparcela * (c.contratante_juroboleto/30), 2), '.', ''), ',', '') AS valor_juros_mora,
+            
             -- cliente / pagador
             CASE WHEN CHAR_LENGTH(cp.CartaoPar_cpf) > 14 THEN '2' ELSE '1' END AS tipo_inscricao_pagador,
             REPLACE(REPLACE(REPLACE(cp.CartaoPar_cpf, '.', ''), '-', ''), '/', '') AS numero_inscricao,
@@ -63,10 +67,12 @@ require FILE_BASE_API . '/autoload/autoload.inc.php';
             SUBSTRING(cc.cartao_clientecep, (LOCATE('-', cc.cartao_clientecep) + 1), 3) AS sufixo_cep,
             cc.cartao_clientecidade AS cidade,
             cc.cartao_clienteuf AS uf,
+            
             -- multa
             CASE WHEN c.contratante_txboleto > 0 THEN '1' ELSE '0' END AS codigo_multa,
-            DATE_FORMAT(cp.CartaoPar_datavencimento,'%d%m%Y') AS data_multa,
-            ROUND(cp.CartaoPar_valorparcela * c.contratante_txboleto / 100, 2) AS valor_multa,
+            CAST(DATE_FORMAT(cp.CartaoPar_datavencimento,'%d%m%Y') AS CHAR) AS data_multa,
+            REPLACE(REPLACE(ROUND(cp.CartaoPar_valorparcela * c.contratante_txboleto / 100, 2), '.', ''), ',', '') AS valor_multa,
+            
             -- nosso numero
             (SELECT '')	AS nosso_numero,
             c.contratante_cooperado AS codigo_cliente,            
@@ -85,8 +91,9 @@ require FILE_BASE_API . '/autoload/autoload.inc.php';
                 WHERE cp2.CartaoPar_login = cp.CartaoPar_login
                     AND cp2.CartaoPar_consulta = cp.CartaoPar_consulta
             ) AS parcela_unica
-                
-        FROM cartao_parcelas cp 
+            
+        FROM cartao_parcelas cp
+        
             INNER JOIN cartao_cliente cc
                 ON cc.cartao_clientecpf = cp.CartaoPar_cpf
             INNER JOIN contratante c
@@ -101,7 +108,7 @@ require FILE_BASE_API . '/autoload/autoload.inc.php';
             
         ORDER BY
             cp.CartaoPar_consulta,
-            cp.CartaoPar_parcela limit 1"
+            cp.CartaoPar_parcela LIMIT 1"
     );
     $stm->bindParam(1, $login, PDO::PARAM_INT);
     $stm->execute();
@@ -111,7 +118,7 @@ require FILE_BASE_API . '/autoload/autoload.inc.php';
     $stm = $pdo->prepare(
         "SELECT
             COUNT(cp.CartaoPar_id) AS cobranca_simples_quantide_total,
-            ROUND(SUM(cp.CartaoPar_valorparcela), 2) AS cobranca_simples_valor_total
+            REPLACE(REPLACE(ROUND(SUM(cp.CartaoPar_valorparcela), 2), '.', ''), ',', '') AS cobranca_simples_valor_total
         FROM cartao_parcelas cp            
             INNER JOIN cartao_cliente cc
                 ON cc.cartao_clientecpf = cp.CartaoPar_cpf
@@ -120,7 +127,7 @@ require FILE_BASE_API . '/autoload/autoload.inc.php';
                     AND c.usuario_LOGIN = cp.CartaoPar_login
             INNER JOIN bancos b
                 ON b.codigo_banco = c.contratante_banco    
-        WHERE cp.CartaoPar_login = ?
+        WHERE cp.CartaoPar_login = 8001
             -- AND cp.CartaoPar_Remessa = 0
             -- AND cp.CartaoPar_Remessa = CURRENT_DATE        
         ORDER BY
@@ -132,7 +139,7 @@ require FILE_BASE_API . '/autoload/autoload.inc.php';
     $parametros['trailler'] = $stm->fetchAll(PDO::FETCH_ASSOC);
 
 
-    $_arquivo_remessa = \Bancos\Sicoob\Remessa\CNAB240\Remessa::gerarRemessa($parametros);
+    $_arquivo_remessa = \Bancos\Sicoob\Remessa\CNAB240\Arquivo::gerarRemessa($parametros);
     var_dump($_arquivo_remessa);
 
     $diretorio = "/var/www/html/siscredit/siscred/operacional/arquivos/" . $login . "/";

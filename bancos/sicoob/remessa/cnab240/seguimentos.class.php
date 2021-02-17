@@ -44,7 +44,6 @@ class SeguimentoS
         $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($informacao8, 40, 'Alfa Numerico'); #SEQ 12.3S
         $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($informacao9, 40, 'Alfa Numerico'); #SEQ 13.3S
         $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($cnab_2, 22, 'Alfa Numerico'); #SEQ 14.3S
-        $_linha .= "\r\n";
         return $_linha;
     }
 }

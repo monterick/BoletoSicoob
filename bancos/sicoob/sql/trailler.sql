@@ -1,6 +1,6 @@
 SELECT
 	COUNT(cp.CartaoPar_id) AS cobranca_simples_quantide_total,
-	ROUND(SUM(cp.CartaoPar_valorparcela), 2) AS cobranca_simples_valor_total
+	REPLACE(REPLACE(ROUND(SUM(cp.CartaoPar_valorparcela), 2), '.', ''), ',', '') AS cobranca_simples_valor_total
 FROM cartao_parcelas cp            
 	INNER JOIN cartao_cliente cc
 		ON cc.cartao_clientecpf = cp.CartaoPar_cpf

@@ -112,7 +112,7 @@ class SeguimentoP
 
         $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($numero_documento, 15, 'Alfa Numerico'); #SEQ 19.3P
         $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($data_vencimento, 8, 'Numerico'); #SEQ 20.3P
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($valor_nominal, 12, 'Numerico'); #SEQ 21.3P
+        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($valor_nominal, 15, 'Numerico'); #SEQ 21.3P
         $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($agencia_encarregada, 5, 'Numerico'); #SEQ 22.3P
         $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($dv_agencia_encarregada, 1, 'Alfa Numerico'); #SEQ 23.3P
         $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($especie_titulo, 2, 'Numerico'); #SEQ 24.3P
@@ -122,13 +122,13 @@ class SeguimentoP
 
         $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($cod_juros_mora, 1, 'Numerico'); #SEQ 27.3P
         $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($data_juros_mora, 8, 'Numerico'); #SEQ 28.3P
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($valor_juros_mora, 13, 'Numerico'); #SEQ 29.3P
+        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($valor_juros_mora, 15, 'Numerico'); #SEQ 29.3P
 
         $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($codigo_desconto_1, 1, 'Numerico'); #SEQ 30.3P
         $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($data_desconto_1, 8, 'Numerico'); #SEQ 31.3P
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($vlr_percent_desc_1, 13, 'Numerico'); #SEQ 32.3P
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($valor_iof, 13, 'Numerico'); #SEQ 33.3P
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($valor_abatimento, 13, 'Numerico'); #SEQ 34.3P
+        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($vlr_percent_desc_1, 15, 'Numerico'); #SEQ 32.3P
+        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($valor_iof, 15, 'Numerico'); #SEQ 33.3P
+        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($valor_abatimento, 15, 'Numerico'); #SEQ 34.3P
 
         $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($empresa_beneficiario, 25, 'Alfa Numerico'); #SEQ 35.3P
 
@@ -141,13 +141,6 @@ class SeguimentoP
         $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($codigo_moeda, 2, 'Numerico'); #SEQ 40.3P
         $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($numero_contrato, 10, 'Numerico'); #SEQ 41.3P
         $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($cnab_2, 1, 'Alfa Numerico'); #SEQ 42.3P
-
-        # Preenchimento dos 10 campos restantes
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher(
-            "",
-            10,
-            'Alfa Numerico'
-        ); #SEQ 43.3P
 
         return $_linha;
     }

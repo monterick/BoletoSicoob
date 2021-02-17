@@ -50,11 +50,11 @@ class Arquivo
                 $boletos['parcela_unica'],
                 $boletos['modalidade']
             );
-            $boletos['nosso_numero'] .= \Bancos\Sicoob\Funcoes\NossoNumero::gerarNossoNumeroDv(
+            /*$boletos['nosso_numero'] .= \Bancos\Sicoob\Funcoes\NossoNumero::gerarNossoNumeroDv(
                 $boletos['agencia_cooperativa'],
                 $boletos['codigo_cliente'],
                 $boletos['nosso_numero']
-            );
+            );*/
             # Seguimento P
             $_remessa .= \Bancos\Sicoob\Remessa\CNAB240\SeguimentoP::get(
                 ($cont += 1),
