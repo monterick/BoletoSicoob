@@ -39,8 +39,9 @@ class NossoNumero
         $digito_verificador = 0;
 
         //contratante_cooperado
-        $cooperativa = str_pad($agencia_cooperativa, 4, 0, STR_PAD_LEFT);
-        $codigo_cliente = str_pad($codigo_cliente, 0, 0, STR_PAD_LEFT);
+        $cooperativa = \Bancos\Sicoob\Funcoes\Preenchimento::preencher($agencia_cooperativa, 4, 'Numerico'); #07.Pré-homologação
+        $codigo_cliente = \Bancos\Sicoob\Funcoes\Preenchimento::preencher($codigo_cliente, 10, 'Numerico'); #07.Pré-homologação
+        $nosso_numero = \Bancos\Sicoob\Funcoes\Preenchimento::preencher($nosso_numero, 7, 'Numerico'); #07.Pré-homologação
 
         $sequencia = $cooperativa . $codigo_cliente . $nosso_numero;
         $constante = 3197;

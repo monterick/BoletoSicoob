@@ -40,7 +40,7 @@ SELECT
    (SELECT '')	AS nosso_numero,
    c.contratante_cooperado AS codigo_cliente,            
    c.contratante_sequencia AS numero_titulo,
-   CASE WHEN c.contratante_comando = '     ' THEN 01 ELSE 03 END AS modalidade,
+   CASE WHEN c.contratante_comando = '     ' THEN 1 ELSE 3 END AS modalidade,
    ( -- subselect para verificar se a compra teve apenas uma parcela
        SELECT CASE WHEN MAX(cp2.CartaoPar_parcela) = 1 THEN 1 ELSE 0 END
        FROM cartao_parcelas cp2
