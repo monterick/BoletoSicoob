@@ -4,75 +4,77 @@ namespace Bancos\Sicoob\Funcoes;
 
 class LinhaDigitavel
 {
-    # Grupo 01
     public static $banco = 756;
     public static $moeda = 9;
-    public static $carteira = 1;
-    public static $agencia_cooperaiva = 4340;
-    public static $modalidade = 01;
-    public static $codigo_cliente = 9;
-    public static $nosso_numero = 9;
-    public static $nosso_numero_dv = 9;
-    public static $parcela = 9;
-    public static $fator_vcto = 9;
-    public static $valor = 9;
 
-
-
-
-
-
-
-
-
-    public static function gerarLinhaDigitavel($carteira, $agencia_cooperativa, $modalidade, $codigo_cliente)
-    {
-
+    public static function gerarLinhaDigitavel(
+        $carteira,
+        $agencia_cooperativa,
+        $modalidade,
+        $codigo_cliente,
+        $nosso_numero,
+        $parcela,
+        $fatorVcto,
+        $valor_nominal
+    ) {
 
         $_linha = "";
-
-        //-----GRUPO 01-----
         $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher(self::$banco, 3, 'Numerico');
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher(self::$moeda, 3, 'Numerico');
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($carteira, 3, 'Numerico');
-        $_linha .= '.';
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($agencia_cooperativa, 3, 'Numerico');
-        $_linha .= \Bancos\Sicoob\Funcoes\LinhaDigitavel::gerarDvLinhaDigitavel(1);
-        //-----GRUPO 02-----
-        $_linha .= ' ';
+        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher(self::$moeda, 1, 'Numerico');
+        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($carteira, 1, 'Numerico');
+        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($agencia_cooperativa, 4, 'Numerico');
+        // digito verificador
         $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($modalidade, 2, 'Numerico');
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($codigo_cliente, 3, 'Numerico');
-
-
-
+        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($codigo_cliente, 7, 'Numerico');
+        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($nosso_numero, 8, 'Numerico');
+        // digitos chamado
+        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($parcela, 3, 'Numerico');
+        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($fatorVcto, 4, 'Numerico');
+        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($valor_nominal, 10, 'Numerico');
 
         return $_linha;
     }
 
-    public static function gerarDvLinhaDigitavel($grupo)
+    public static function gerarDvLinhaDigitavel($linhaDigitavel)
     {
-        $dv = 0;
-
-        switch ($grupo) {
-            case 1:
-                # code...
-                break;
-
-            case 2:
-                #code
-                break;
-
-            case 3:
-                #code
-                break;
+        $indice = '2121212120121212121201212121212';
+        $teste = '75691434020187155900900011000015874410000001000';
 
 
-            default:
-                # code...
-                break;
+
+
+
+
+
+
+
+
+
+        for ($i = 0; $i < strlen($linhaDigitavel); $i++) {
+            # code...
         }
 
-        return $dv;
+
+
+
+        $digito = 0;
+        $soma = 0;
+        $mult = 0;
+        $contador = 0;
+
+        for ($i = 0; $i < 9; $i++) {
+            $mult = (intval($linhaDigitavel[$i])) * (intval($indice[$i]));
+
+            if ($mult >= 10) {
+                $soma = $soma + $mult[1] + $mult[2];
+            } else {
+                $soma = $soma + $mult;
+            }
+        }
+
+        $digito = $multiplo10($soma) - $soma;
+
+        $linhaDigitavel[10] = $digito[1];
     }
 }
 

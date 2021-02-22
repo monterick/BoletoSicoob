@@ -4,25 +4,25 @@ namespace Bancos\Sicoob\Funcoes;
 
 class NossoNumero
 {
+    public static $tipo_formulario = 4;
+    public static $brancos = "";
 
     /**
      * Gera nosso numero sicoob
      *
      * @param [numeric] $numero_titulo
-     * @param [numeric] $parcela_unica
+     * @param [numeric] $numero_parcela
      * @param [numeric] $modalidade
      * @return void
      */
-    public static function gerarNossoNumero($numero_titulo, $parcela_unica, $modalidade)
+    public static function gerarNossoNumero($numero_titulo, $numero_parcela, $modalidade)
     {
-        $tipo_formulario = 4;
-        $brancos = "";
         $_nosso_numero = "";
-        $_nosso_numero .= str_pad($numero_titulo, 10, 0, STR_PAD_LEFT);
-        $_nosso_numero .= str_pad($parcela_unica, 2, 0, STR_PAD_LEFT);
-        $_nosso_numero .= str_pad($modalidade, 2, 0, STR_PAD_LEFT);
-        $_nosso_numero .= str_pad($tipo_formulario, 1, 0, STR_PAD_LEFT);
-        $_nosso_numero .= str_pad($brancos, 5, " ", STR_PAD_LEFT);
+        $_nosso_numero .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($numero_titulo, 10, 'Numerico');
+        $_nosso_numero .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($numero_parcela, 2, 'Numerico');
+        $_nosso_numero .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($modalidade, 2, 'Numerico');
+        $_nosso_numero .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher(self::$tipo_formulario, 1, 'Numerico');
+        $_nosso_numero .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher(self::$brancos, 5, 'Numerico');
         return $_nosso_numero;
     }
 

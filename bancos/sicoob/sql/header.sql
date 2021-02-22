@@ -9,7 +9,7 @@ SELECT
 	c.contratante_conta AS conta_corrente,
 	c.contratante_contaDV AS dv_conta_corrente,
 	c.cont_nomefantasia AS nome_empresa,
-	c.contratante_sequencia AS num_controle_cobranca,	
+	c.contratante_sequencia AS num_controle_cobranca,
 	CAST(DATE_FORMAT(NOW(), '%d%m%Y') AS CHAR) AS data_geracao,
 	REPLACE(TIME_FORMAT(NOW(), '%T'), ':', '') AS hora_geracao	
 FROM contratante c

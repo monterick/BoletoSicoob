@@ -47,7 +47,7 @@ class Arquivo
             # Nosso Numero
             $boletos['nosso_numero'] = \Bancos\Sicoob\Funcoes\NossoNumero::gerarNossoNumero(
                 $boletos['numero_titulo'],
-                $boletos['parcela_unica'],
+                $boletos['numero_parcela'],
                 $boletos['modalidade']
             );
             /*$boletos['nosso_numero'] .= \Bancos\Sicoob\Funcoes\NossoNumero::gerarNossoNumeroDv(
