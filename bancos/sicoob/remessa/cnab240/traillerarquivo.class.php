@@ -24,14 +24,14 @@ class TraillerArquivo
 
         # Linha
         $_linha = "";
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($banco, 3, 'Numerico'); # SEQ 01.9
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($lote, 4, 'Numerico'); #SEQ 02.9
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($tipo_registro, 1, 'Numerico'); #SEQ 03.9
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($qnab_1, 9, 'Alfa Numerico'); #SEQ 04.9
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($quantidade_lotes, 6, 'Numerico'); #SEQ 04.9
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($qtd_reg_arquivo, 6, 'Numerico'); #SEQ 06.9
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($quantidade_contas, 6, 'Numerico'); #SEQ 07.9
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($qnab_2, 205, 'Alfa Numerico'); #SEQ 08.9
+        $_linha .= \Bancos\Sicoob\Util\Preenchimento::preencher($banco, 3, 'Numerico'); # SEQ 01.9
+        $_linha .= \Bancos\Sicoob\Util\Preenchimento::preencher($lote, 4, 'Numerico'); #SEQ 02.9
+        $_linha .= \Bancos\Sicoob\Util\Preenchimento::preencher($tipo_registro, 1, 'Numerico'); #SEQ 03.9
+        $_linha .= \Bancos\Sicoob\Util\Preenchimento::preencher($qnab_1, 9, 'Alfa Numerico'); #SEQ 04.9
+        $_linha .= \Bancos\Sicoob\Util\Preenchimento::preencher($quantidade_lotes, 6, 'Numerico'); #SEQ 04.9
+        $_linha .= \Bancos\Sicoob\Util\Preenchimento::preencher($qtd_reg_arquivo, 6, 'Numerico'); #SEQ 06.9
+        $_linha .= \Bancos\Sicoob\Util\Preenchimento::preencher($quantidade_contas, 6, 'Numerico'); #SEQ 07.9
+        $_linha .= \Bancos\Sicoob\Util\Preenchimento::preencher($qnab_2, 205, 'Alfa Numerico'); #SEQ 08.9
         return $_linha;
     }
 }

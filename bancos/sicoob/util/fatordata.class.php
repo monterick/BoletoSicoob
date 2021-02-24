@@ -1,6 +1,6 @@
 <?php
 
-namespace Bancos\Sicoob\Funcoes;
+namespace Bancos\Sicoob\Util;
 
 use DateInterval;
 use DateTime;
@@ -17,7 +17,7 @@ class FatorData
      */
     public static function getFatorVcto($data_vencimento)
     {
-        $data_vencimento = \Bancos\Sicoob\Funcoes\FatorData::formataData($data_vencimento);
+        $data_vencimento = \Bancos\Sicoob\Util\FatorData::formataData($data_vencimento);
         $data_sicoob = new DateTime(self::$data_sicoob);
         $_fator = (date_diff($data_sicoob, $data_vencimento)->days + 1000);
         return $_fator;
@@ -31,7 +31,7 @@ class FatorData
      */
     public static function getFatorData($data_vencimento)
     {
-        $fator = \Bancos\Sicoob\Funcoes\FatorData::getFatorVcto($data_vencimento);
+        $fator = \Bancos\Sicoob\Util\FatorData::getFatorVcto($data_vencimento);
         if ($fator == 0) {
             $_data = 0;
         } else {

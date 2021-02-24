@@ -13,134 +13,110 @@ class LinhaDigitavel
         $modalidade,
         $codigo_cliente,
         $nosso_numero,
-        $numero_parcela
+        $numero_parcela,
+        $data_vencimento,
+        $valor_nominal
     ) {
-
         $_linha = "";
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($banco, 3, 'Numerico');
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($moeda, 1, 'Numerico');
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($carteira, 1, 'Numerico');
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($agencia_cooperativa, 4, 'Numerico');
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($modalidade, 2, 'Numerico');
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($codigo_cliente, 7, 'Numerico');
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($nosso_numero, 8, 'Numerico');
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($numero_parcela, 3, 'Numerico');
+        $_linha .= \Bancos\Sicoob\Util\Preenchimento::preencher($banco, 3, 'Numerico');
+        $_linha .= \Bancos\Sicoob\Util\Preenchimento::preencher($moeda, 1, 'Numerico');
+        $_linha .= \Bancos\Sicoob\Util\Preenchimento::preencher($carteira, 1, 'Numerico');
+        $_linha .= \Bancos\Sicoob\Util\Preenchimento::preencher($agencia_cooperativa, 4, 'Numerico');
+        $_linha .= \Bancos\Sicoob\Util\Preenchimento::preencher($modalidade, 2, 'Numerico');
+        $_linha .= \Bancos\Sicoob\Util\Preenchimento::preencher($codigo_cliente, 7, 'Numerico');
+        $_linha .= \Bancos\Sicoob\Util\Preenchimento::preencher($nosso_numero, 8, 'Numerico');
+        $_linha .= \Bancos\Sicoob\Util\Preenchimento::preencher($numero_parcela, 3, 'Numerico');
+
+        $_linha = \Bancos\Sicoob\Boleto\LinhaDigitavel::gerarDvLinhaDigitavel($_linha);
+
+        $_linha .= \Bancos\Sicoob\Boleto\CodigoBarras::gerarDvCodigoBarras($_linha);
+        $_linha .= \Bancos\Sicoob\Util\Preenchimento::preencher(
+            \Bancos\Sicoob\Util\FatorData::getFatorVcto($data_vencimento),
+            4,
+            'Numerico'
+        );
+        $_linha .= \Bancos\Sicoob\Util\Preenchimento::preencher($valor_nominal, 10, 'Numerico');
         return $_linha;
     }
 
-    public static function gerarDvLinhaDigitavel($linha_digitavel, $modulo)
+
+
+    public static function gerarDvLinhaDigitavel($linha_digitavel)
     {
-        $dv = 0;
         $indice = 2;
+        $grupo_1 = substr($linha_digitavel, 0, 9);
+        $grupo_2 = substr($linha_digitavel, 10, 10);
+        $grupo_3 = substr($linha_digitavel, 21, 10);
+        $dv_grupo_1 = 0;
+        $dv_grupo_2 = 0;
+        $dv_grupo_3 = 0;
 
-        switch ($modulo) {
-            case 1:
-                for ($i = strlen($linha_digitavel); $i > 0; $i--) {
-                    $linha[$i] = substr($linha_digitavel, $i - 1, 1);
+        //$linha_digitavel = '756914340201871559009000110000158'; //74410000001000
 
-                    $temp = $linha[$i] * $indice;
+        # Grupo 1 #
+        for ($i = strlen($grupo_1); $i > 0; $i--) {
+            $linha[$i] = substr($grupo_1, $i - 1, 1);
 
-                    if ($temp > 9) {
-                        $temp = substr($temp, 0, 1) + substr($temp, 1, 1)
-                    };
+            $temp = $linha[$i] * $indice;
 
-                    $dv += $temp;
+            while ($temp > 9) {
+                $temp = substr($temp, 0, 1) + substr($temp, 1, 1);
+            }
 
-                    if ($indice == 2) {
-                        $indice = 1;
-                    } else {
-                        $indice = 2;
-                    }
-                }
+            $temp += $temp;
 
-
-
-
-
-
-
-                break;
-
-
-
-
-
-
-
-
-
-
-
-            case 2:
-                # code...
-                break;
-
-            case 2:
-                # code...
-                break;
-
-            default:
-                # code...
-                break;
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-        $digito = 0;
-        $soma = 0;
-        $mult = 0;
-        $indice = "";
-        for ($i = 0; $i < strlen($linha_digitavel); $i++) {
-            if ($i % 2 == 0) {
-                $indice .= 2;
+            if ($indice == 2) {
+                $indice = 1;
             } else {
-                $indice .= 1;
+                $indice = 2;
             }
         }
+        $dv_grupo_1 = \Bancos\Sicoob\Util\Multiplo::getMultiplo10($temp) - $temp;
 
-        $soma = 0;
-        $mult = 0;
-        $digito = 0;
-        for ($i = 1; $i <= 9; $i++) {
-            $mult = $linhaDigitavel[$i] * $indice[$i];
-            if ($mult >= 10) {
-                $soma = $soma + $mult[1] + $mult[2];
+        # Grupo 2 #
+        for ($i = strlen($grupo_2); $i > 0; $i--) {
+            $linha[$i] = substr($grupo_2, $i - 1, 1);
+
+            $temp = $linha[$i] * $indice;
+
+            while ($temp > 9) {
+                $temp = substr($temp, 0, 1) + substr($temp, 1, 1);
+            }
+
+            $temp += $temp;
+
+            if ($indice == 2) {
+                $indice = 1;
             } else {
-                $soma += $mult;
+                $indice = 2;
             }
         }
+        $dv_grupo_2 = \Bancos\Sicoob\Util\Multiplo::getMultiplo10($temp) - $temp;
 
-        $multiplo10 = \Bancos\Sicoob\Funcoes\Multiplo::getMultiplo10($soma);
-        $digito = $multiplo10 - $soma;
-        $linhaDigitavel[10] = $digito[1];
+        # Grupo 3 #
+        for ($i = strlen($grupo_3); $i > 0; $i--) {
+            $linha[$i] = substr($grupo_3, $i - 1, 1);
 
-        echo $linhaDigitavel;
+            $temp = $linha[$i] * $indice;
 
+            while ($temp > 9) {
+                $temp = substr($temp, 0, 1) + substr($temp, 1, 1);
+            }
 
+            $temp += $temp;
 
-
-
-
-
-
-
-        $indice = '2121212120121212121201212121212';
-        $soma = 0;
-        for ($i = 0; $i <= strlen($_linha); $i++) {
+            if ($indice == 2) {
+                $indice = 1;
+            } else {
+                $indice = 2;
+            }
         }
+        $dv_grupo_3 = \Bancos\Sicoob\Util\Multiplo::getMultiplo10($temp) - $temp;
 
-        $_linha;
+        $linha_digitavel = \Bancos\Sicoob\Util\Preenchimento::inserirNaPosicao($linha_digitavel, 10, $dv_grupo_1);
+        $linha_digitavel = \Bancos\Sicoob\Util\Preenchimento::inserirNaPosicao($linha_digitavel, 21, $dv_grupo_2);
+        $linha_digitavel = \Bancos\Sicoob\Util\Preenchimento::inserirNaPosicao($linha_digitavel, 32, $dv_grupo_3);
 
-
-        $soma = 0;
+        return $linha_digitavel;
     }
 }

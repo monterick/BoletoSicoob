@@ -1,6 +1,6 @@
 <?php
 
-namespace Bancos\Sicoob\Funcoes;
+namespace Bancos\Sicoob\Util;
 
 class Multiplo
 {

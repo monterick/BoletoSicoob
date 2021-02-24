@@ -58,35 +58,35 @@ class HeaderLote
 
         # Linha
         $_linha = "";
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($banco, 3, 'Numerico'); #SEQ 01.1
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($lote, 4, 'Numerico'); #SEQ 02.1
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($tipo_registro, 1, 'Numerico'); #SEQ 03.1
+        $_linha .= \Bancos\Sicoob\Util\Preenchimento::preencher($banco, 3, 'Numerico'); #SEQ 01.1
+        $_linha .= \Bancos\Sicoob\Util\Preenchimento::preencher($lote, 4, 'Numerico'); #SEQ 02.1
+        $_linha .= \Bancos\Sicoob\Util\Preenchimento::preencher($tipo_registro, 1, 'Numerico'); #SEQ 03.1
 
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($tipo_operacao, 1, 'Alfa Numerico'); #SEQ 04.1
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($tipo_servico, 2, 'Numerico'); #SEQ 05.1
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($cnab_1, 2, 'Alfa Numerico'); #SEQ 06.1
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($layout_lote, 3, 'Numerico'); #SEQ 07.1
+        $_linha .= \Bancos\Sicoob\Util\Preenchimento::preencher($tipo_operacao, 1, 'Alfa Numerico'); #SEQ 04.1
+        $_linha .= \Bancos\Sicoob\Util\Preenchimento::preencher($tipo_servico, 2, 'Numerico'); #SEQ 05.1
+        $_linha .= \Bancos\Sicoob\Util\Preenchimento::preencher($cnab_1, 2, 'Alfa Numerico'); #SEQ 06.1
+        $_linha .= \Bancos\Sicoob\Util\Preenchimento::preencher($layout_lote, 3, 'Numerico'); #SEQ 07.1
 
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($cnab_2, 1, 'Alfa Numerico'); #SEQ 08.1
+        $_linha .= \Bancos\Sicoob\Util\Preenchimento::preencher($cnab_2, 1, 'Alfa Numerico'); #SEQ 08.1
 
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($tipo_inscricao, 1, 'Numerico'); #SEQ 09.1
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($numero_inscricao, 15, 'Numerico'); #SEQ 10.1
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($codigo_convenio, 20, 'Alfa Numerico'); #SEQ 11.1
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($agencia_cooperativa, 5, 'Numerico'); #SEQ 12.1
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($dv_prefixo, 1, 'Alfa Numerico'); #SEQ 13.1
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($conta_corrente, 12, 'Numerico'); #SEQ 14.1
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($dv_conta_corrente, 1, 'Alfa Numerico'); #SEQ 15.1
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($dv_ag_conta_corrente, 1, 'Alfa Numerico'); #SEQ 16.1
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($nome_empresa, 30, 'Alfa Numerico'); #SEQ 17.1
+        $_linha .= \Bancos\Sicoob\Util\Preenchimento::preencher($tipo_inscricao, 1, 'Numerico'); #SEQ 09.1
+        $_linha .= \Bancos\Sicoob\Util\Preenchimento::preencher($numero_inscricao, 15, 'Numerico'); #SEQ 10.1
+        $_linha .= \Bancos\Sicoob\Util\Preenchimento::preencher($codigo_convenio, 20, 'Alfa Numerico'); #SEQ 11.1
+        $_linha .= \Bancos\Sicoob\Util\Preenchimento::preencher($agencia_cooperativa, 5, 'Numerico'); #SEQ 12.1
+        $_linha .= \Bancos\Sicoob\Util\Preenchimento::preencher($dv_prefixo, 1, 'Alfa Numerico'); #SEQ 13.1
+        $_linha .= \Bancos\Sicoob\Util\Preenchimento::preencher($conta_corrente, 12, 'Numerico'); #SEQ 14.1
+        $_linha .= \Bancos\Sicoob\Util\Preenchimento::preencher($dv_conta_corrente, 1, 'Alfa Numerico'); #SEQ 15.1
+        $_linha .= \Bancos\Sicoob\Util\Preenchimento::preencher($dv_ag_conta_corrente, 1, 'Alfa Numerico'); #SEQ 16.1
+        $_linha .= \Bancos\Sicoob\Util\Preenchimento::preencher($nome_empresa, 30, 'Alfa Numerico'); #SEQ 17.1
 
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($informacao_1, 40, 'Alfa Numerico'); #SEQ 18.1
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($informacao_2, 40, 'Alfa Numerico'); #SEQ 19.1
+        $_linha .= \Bancos\Sicoob\Util\Preenchimento::preencher($informacao_1, 40, 'Alfa Numerico'); #SEQ 18.1
+        $_linha .= \Bancos\Sicoob\Util\Preenchimento::preencher($informacao_2, 40, 'Alfa Numerico'); #SEQ 19.1
 
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($num_controle_cobranca, 8, 'Numerico'); #SEQ 20.1
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($data_gravacao, 8, 0, 'Numerico'); #SEQ 21.1
+        $_linha .= \Bancos\Sicoob\Util\Preenchimento::preencher($num_controle_cobranca, 8, 'Numerico'); #SEQ 20.1
+        $_linha .= \Bancos\Sicoob\Util\Preenchimento::preencher($data_gravacao, 8, 0, 'Numerico'); #SEQ 21.1
 
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($data_credito, 8, 0, 'Numerico'); #SEQ 22.1
-        $_linha .= \Bancos\Sicoob\Funcoes\Preenchimento::preencher($cnab_3, 33, 'Alfa Numerico'); #SEQ 23.1
+        $_linha .= \Bancos\Sicoob\Util\Preenchimento::preencher($data_credito, 8, 0, 'Numerico'); #SEQ 22.1
+        $_linha .= \Bancos\Sicoob\Util\Preenchimento::preencher($cnab_3, 33, 'Alfa Numerico'); #SEQ 23.1
         return $_linha;
     }
 }

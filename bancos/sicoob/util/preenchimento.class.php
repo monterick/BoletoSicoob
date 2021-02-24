@@ -1,6 +1,6 @@
 <?php
 
-namespace Bancos\Sicoob\Funcoes;
+namespace Bancos\Sicoob\Util;
 
 class Preenchimento
 {
@@ -36,5 +36,18 @@ class Preenchimento
         } else {
             return 'Erro ao Prencher valor';
         }
+    }
+
+    /**
+     * insere digito na posição desejada
+     *
+     * @param [type] $string
+     * @param [type] $posicao
+     * @param [type] $caracter
+     * @return void
+     */
+    public static function inserirNaPosicao($string, $posicao, $caracter)
+    {
+        return substr_replace($string, $posicao, $caracter, 0);
     }
 }
