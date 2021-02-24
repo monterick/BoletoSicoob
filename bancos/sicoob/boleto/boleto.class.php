@@ -114,4 +114,21 @@ class Boleto
 
         return $parametros;
     }
+
+    public static function adicionarNossoNumero(array $parametros)
+    {
+        foreach ($parametros['boletos'] as $key => $boletos) {
+            // gerando o nosso numero com o digito verificador e adicionando a variavel $boletos
+            $boletos['nosso_numero'] = \Bancos\Sicoob\Boleto\NossoNumero::gerarNossoNumero(
+                $boletos['numero_titulo'],
+                $boletos['parcela_unica'],
+                $boletos['modalidade']
+            );
+            $boletos['nosso_numero'] .= \Bancos\Sicoob\Boleto\NossoNumero::gerarNossoNumeroDv(
+                $boletos['agencia_cooperativa'],
+                $boletos['codigo_cliente'],
+                $boletos['nosso_numero']
+            );
+        }
+    }
 }
