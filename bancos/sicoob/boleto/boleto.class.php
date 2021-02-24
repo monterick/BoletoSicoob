@@ -17,12 +17,12 @@ class Boleto
     {
         foreach ($parametros['boletos'] as $key => $boletos) {
             // gerando o nosso numero com o digito verificador e adicionando a variavel $boletos
-            $boletos['nosso_numero'] = \Bancos\Sicoob\Util\NossoNumero::gerarNossoNumero(
+            $boletos['nosso_numero'] = \Bancos\Sicoob\Boleto\NossoNumero::gerarNossoNumero(
                 $boletos['numero_titulo'],
                 $boletos['parcela_unica'],
                 $boletos['modalidade']
             );
-            $boletos['nosso_numero'] .= \Bancos\Sicoob\Util\NossoNumero::gerarNossoNumeroDv(
+            $boletos['nosso_numero'] .= \Bancos\Sicoob\Boleto\NossoNumero::gerarNossoNumeroDv(
                 $boletos['agencia_cooperativa'],
                 $boletos['codigo_cliente'],
                 $boletos['nosso_numero']
@@ -43,7 +43,19 @@ class Boleto
             );
 
             // adicionando digito verificador do codigo de barras
-            $_linha .= \Bancos\Sicoob\Boleto\CodigoBarras::gerarDvCodigoBarras();
+            $_codigo_barras = \Bancos\Sicoob\Boleto\CodigoBarras::gerarCodigoBarras(
+                self::$banco,
+                self::$moeda,
+                $boletos['data_vencimento'],
+                $boletos['valor_nominal'],
+                $boletos['carteira'],
+                $boletos['agencia_cooperativa'],
+                $boletos['modalidade'],
+                $boletos['cliente'],
+                $boletos['nosso_numero'],
+                $boletos['parcela']
+            );
+            $_linha .= \Bancos\Sicoob\Boleto\CodigoBarras::gerarDvCodigoBarras($_codigo_barras);
 
             // adicionando Fator de vencimento a linha digitavel
             $_linha .= \Bancos\Sicoob\Util\Preenchimento::preencher(
@@ -68,12 +80,12 @@ class Boleto
     {
         foreach ($parametros['boletos'] as $key => $boletos) {
             // gerando o nosso numero com o digito verificador e adicionando a variavel $boletos
-            $boletos['nosso_numero'] = \Bancos\Sicoob\Util\NossoNumero::gerarNossoNumero(
+            $boletos['nosso_numero'] = \Bancos\Sicoob\Boleto\NossoNumero::gerarNossoNumero(
                 $boletos['numero_titulo'],
                 $boletos['parcela_unica'],
                 $boletos['modalidade']
             );
-            $boletos['nosso_numero'] .= \Bancos\Sicoob\Util\NossoNumero::gerarNossoNumeroDv(
+            $boletos['nosso_numero'] .= \Bancos\Sicoob\Boleto\NossoNumero::gerarNossoNumeroDv(
                 $boletos['agencia_cooperativa'],
                 $boletos['codigo_cliente'],
                 $boletos['nosso_numero']

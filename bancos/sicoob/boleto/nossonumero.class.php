@@ -1,6 +1,6 @@
 <?php
 
-namespace Bancos\Sicoob\Util;
+namespace Bancos\Sicoob\Boleto;
 
 class NossoNumero
 {

@@ -45,7 +45,7 @@ class Arquivo
         $cont = 0;
         foreach ($paramametros['boletos'] as $key => $boletos) {
             # Nosso Numero
-            $boletos['nosso_numero'] = \Bancos\Sicoob\Util\NossoNumero::gerarNossoNumero(
+            $boletos['nosso_numero'] = \Bancos\Sicoob\Boleto\NossoNumero::gerarNossoNumero(
                 $boletos['numero_titulo'],
                 $boletos['numero_parcela'],
                 $boletos['modalidade']
